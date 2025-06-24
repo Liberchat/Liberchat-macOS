@@ -21,3 +21,10 @@ Thumbs.db
 
 # VSCode
 .vscode/
+
+# Electron macOS build output
+liberchat-darwin-x64/
+liberchat-macos.dmg
+
+# Linux AppImage extraction
+squashfs-root/

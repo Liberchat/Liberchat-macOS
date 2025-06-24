@@ -1,0 +1,9 @@
+{
+  "title": "Liberchat",
+  "icon": "assets/icons/liberchat.icns",
+  "background": "assets/icons/1024x1024/liberchat.png",
+  "contents": [
+    { "x": 130, "y": 220, "type": "file", "path": "liberchat-darwin-x64/liberchat.app" },
+    { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+  ]
+}

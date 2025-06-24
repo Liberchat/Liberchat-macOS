@@ -1,15 +1,17 @@
 {
   "name": "liberchat",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Liberchat Desktop App",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "package-mac": "electron-packager . liberchat --platform=darwin --arch=x64 --icon=assets/icons/liberchat.icns --overwrite"
   },
   "build": {
     "appId": "com.liberchat.desktop",
     "productName": "Liberchat",
+    "icon": "assets/icons/liberchat",
     "directories": {
       "output": "dist"
     },
@@ -53,18 +55,24 @@
         }
       ],
       "category": "Network",
-      "icon": "assets/icon.png",
+      "icon": "assets/icons/256x256/liberchat.png",
       "artifactName": "${productName}-${version}-${os}.${ext}",
       "maintainer": "Liberchat Team <contact@liberchat.org>"
     },
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
       "deleteAppDataOnUninstall": true
     },
     "files": [
-      "**/*"
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "assets/**/*",
+      "node_modules/**/*",
+      "package.json"
     ],
     "asar": true
   },
@@ -75,6 +83,7 @@
   "homepage": "https://github.com/Liberchat/Liberchat",
   "devDependencies": {
     "electron": "^22.3.27",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
   }
 }

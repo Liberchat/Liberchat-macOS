@@ -39,6 +39,9 @@ function createWindow() {
         center: true,
         show: false,
         autoHideMenuBar: true,
+        icon: process.platform === 'darwin' 
+            ? path.join(__dirname, 'assets', 'icons', 'liberchat.icns') 
+            : path.join(__dirname, 'assets', 'icons', 'liberchat.png'),
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
