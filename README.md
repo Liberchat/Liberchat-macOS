@@ -74,3 +74,4 @@ MIT
 Projet moderne, pensé pour la compatibilité et la simplicité d’utilisation sur toutes les distributions Linux.
 # Liberchat-Linux
 # Liberchat-MacOS
+# Liberchat-macOS
