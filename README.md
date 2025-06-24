@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/Liberchat/Liberchat">
-    <img src="assets/icons/liberchat.ico" alt="Liberchat Logo" width="96" height="96" style="margin-bottom: 10px;" />
+    <img src="assets/icon.ico" alt="Liberchat Logo" width="96" height="96" style="margin-bottom: 10px;" />
   </a>
   
   <h1 style="margin-top: 0;">Liberchat MacOS Desktop</h1>
