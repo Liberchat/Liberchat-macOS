@@ -1,16 +1,16 @@
 <div align="center">
   <a href="https://github.com/Liberchat/Liberchat">
-    <img src="assets/icon.ico" alt="Liberchat Logo" width="96" height="96" style="margin-bottom: 10px;" />
+    <img src="assets/icons/liberchat.icns" alt="Liberchat Logo" width="96" height="96" style="margin-bottom: 10px;" />
   </a>
   
-  <h1 style="margin-top: 0;">Liberchat Linux Desktop</h1>
+  <h1 style="margin-top: 0;">Liberchat MacOS Desktop</h1>
   
   <a href="https://github.com/Liberchat/Liberchat">Projet principal sur GitHub</a>
   
   <br/>
   
   <img src="https://img.shields.io/badge/Electron-22.x-blue?logo=electron"/>
-  <img src="https://img.shields.io/badge/Linux-compatible-success?logo=linux"/>
+  <img src="https://img.shields.io/badge/MacOS-compatible-success?logo=apple"/>
   <img src="https://img.shields.io/badge/UI-Modern-red"/>
   <img src="https://img.shields.io/badge/license-MIT-green"/>
   
@@ -23,7 +23,7 @@
 - **Compatibilité micro** (permissions automatiques)
 - **Sécurité** : contextIsolation, preload sécurisé
 - **Fenêtre principale maximisée, sans barre de menu**
-- **Build universel Linux** : AppImage, deb, rpm, snap
+- **Build universel MacOS** : app et DMG
 
 ## Installation & Lancement
 
@@ -34,44 +34,33 @@ npm install
 # Lancer en mode développement
 npm start
 
-# Générer les paquets pour Linux (AppImage, deb, rpm, snap)
-npm run build
+# Générer l’application MacOS (dossier .app)
+npm run package-mac
+
+# Générer le fichier DMG (installateur Mac)
+npx appdmg dmg.json liberchat-macos.dmg
 ```
 
-Les fichiers générés se trouvent dans le dossier `dist/`.
+Les fichiers générés se trouvent à la racine du projet :
+- `liberchat-darwin-x64/liberchat.app` (application MacOS)
+- `liberchat-macos.dmg` (installateur DMG)
 
-## Installation sur Linux
+## Installation sur MacOS
 
-Après compilation (`npm run build`), vous trouverez dans le dossier `dist/` :
-
-- **AppImage** (`.AppImage`) : universel, exécutable sur la plupart des distributions.
-  - Rendez le fichier exécutable : `chmod +x Liberchat-*.AppImage`
-  - Lancez-le : `./Liberchat-*.AppImage`
-
-- **Debian/Ubuntu** (`.deb`) :
-  - Installez avec : `sudo dpkg -i Liberchat-*.deb`
-  - Ou double-cliquez sur le fichier dans votre gestionnaire de fichiers.
-
-- **Fedora/RedHat** (`.rpm`) :
-  - Installez avec : `sudo rpm -i Liberchat-*.rpm`
-
-- **Snap** (`.snap`) :
-  - Installez avec : `sudo snap install --dangerous Liberchat-*.snap`
-
-> **Astuce** : AppImage fonctionne sur la plupart des distributions sans installation système.
+- **Depuis le DMG** : Ouvre `liberchat-macos.dmg` puis glisse l’icône Liberchat dans le dossier Applications.
+- **Depuis le .app** : Copie simplement `liberchat-darwin-x64/liberchat.app` dans ton dossier Applications.
 
 ## Configuration du serveur
-Au démarrage, saisissez l’URL du serveur Liberchat de votre choix dans le splash screen.
+Au démarrage, saisis l’URL du serveur Liberchat de ton choix dans le splash screen.
 
 ## Dépendances principales
 - [Electron](https://www.electronjs.org/) ^22.x
-- [electron-builder](https://www.electron.build/)
+- [electron-packager](https://github.com/electron/electron-packager)
+- [appdmg](https://github.com/LinusU/node-appdmg)
 
 ## Licence
 MIT
 
 ---
-Projet moderne, pensé pour la compatibilité et la simplicité d’utilisation sur toutes les distributions Linux.
-# Liberchat-Linux
-# Liberchat-MacOS
-# Liberchat-macOS
+Projet moderne, pensé pour la compatibilité et la simplicité d’utilisation sur MacOS.
+
