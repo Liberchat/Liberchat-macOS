@@ -1,30 +1,20 @@
-# Node modules
+# Dependencies
 node_modules/
-
-# Build output
-dist/
-
-# Logs
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Build outputs
+liberchat-darwin-x64/
+dist/
+*.dmg
+*.zip
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Env files
-.env
-
-# Electron cache
-.cache/
-
-# VSCode
+# IDE
 .vscode/
+.idea/
 
-# Electron macOS build output
-liberchat-darwin-x64/
-liberchat-macos.dmg
-
-# Linux AppImage extraction
-squashfs-root/
+# Logs
+*.log

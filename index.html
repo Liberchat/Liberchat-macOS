@@ -1,102 +1,271 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>Liberchat</title>
 	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 	<style>
-	body {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 100vh;
-		background: linear-gradient(135deg, #f5f6fa 0%, #e0e4ea 100%);
-		margin: 0;
-		color: #222;
-		font-family: 'Segoe UI', Arial, sans-serif;
-	}
-	.logo {
-		width: 72px;
-		height: 72px;
-		margin-bottom: 18px;
-		border-radius: 16px;
-		box-shadow: 0 2px 12px #0001;
-		background: #fff;
-		padding: 8px;
-	}
-	.title {
-		font-size: 2em;
-		font-weight: 700;
-		letter-spacing: 1px;
-		color: #c00;
-		margin-bottom: 8px;
-	}
-	.loader {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 18px 0 10px 0;
-	}
-	.loader-dot {
-		width: 12px;
-		height: 12px;
-		margin: 0 4px;
-		border-radius: 50%;
-		background: #c00;
-		animation: bounce 1.2s infinite ease-in-out both;
-	}
-	.loader-dot:nth-child(2) {
-		animation-delay: 0.2s;
-	}
-	.loader-dot:nth-child(3) {
-		animation-delay: 0.4s;
-	}
-	@keyframes bounce {
-		0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
-		40% { transform: scale(1.2); opacity: 1; }
-	}
-	.slogan {
-		font-size: 1em;
-		color: #888;
-		margin-bottom: 18px;
-	}
-	#server-form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 8px;
-		margin-top: 10px;
-	}
-	#server-input {
-		padding: 8px 12px;
-		border-radius: 6px;
-		border: 1px solid #bbb;
-		font-size: 1em;
-		width: 260px;
-		background: #fff;
-		color: #222;
-		box-shadow: 0 1px 4px #0001;
-	}
-	#server-form button {
-		padding: 8px 24px;
-		background: #c00;
-		color: #fff;
-		border: none;
-		border-radius: 6px;
-		font-weight: 600;
-		font-size: 1em;
-		cursor: pointer;
-		transition: background 0.2s, box-shadow 0.2s;
-		box-shadow: 0 1px 4px #c001;
-	}
-	#server-form button:hover {
-		background: #a00;
-		box-shadow: 0 2px 8px #c002;
-	}
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			/* Empêche toutes les barres */
+		}
+
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+			background: linear-gradient(135deg, #f5f6fa 0%, #e0e4ea 100%);
+			color: #222;
+			font-family: 'Segoe UI', Arial, sans-serif;
+			transition: all 0.3s ease;
+			padding: 20px 0;
+			/* Ajoute un peu d'espace en haut et en bas */
+		}
+
+		/* Thème sombre pour le splash screen */
+		body.dark {
+			background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+			color: #e0e0e0;
+		}
+
+		body.dark .logo {
+			background: #333;
+			box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
+		}
+
+		body.dark .title {
+			color: #ff4444;
+		}
+
+		body.dark .slogan {
+			color: #aaa;
+		}
+
+		body.dark #server-input {
+			background: #333;
+			color: #e0e0e0;
+			border-color: #555;
+		}
+
+		body.dark #server-form button {
+			background: #ff4444;
+		}
+
+		body.dark #server-form button:hover {
+			background: #cc3333;
+		}
+
+		body.dark .theme-toggle {
+			background: #333;
+			border-color: #555;
+			color: #e0e0e0;
+		}
+
+		body.dark .theme-toggle:hover {
+			background: #444;
+		}
+
+		/* Conteneur pour le champ et dropdown */
+		.input-container {
+			position: relative;
+			width: 260px;
+		}
+
+		/* Sélecteur de serveurs récents */
+		.server-history {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #fff;
+			border: 1px solid #ddd;
+			border-top: none;
+			border-radius: 0 0 6px 6px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			z-index: 1000;
+			max-height: 120px;
+			/* Réduit encore plus */
+			overflow: hidden;
+			/* Pas de scroll */
+			max-width: 260px;
+			box-sizing: border-box;
+		}
+
+		body.dark .server-history {
+			background: #333;
+			border-color: #555;
+		}
+
+
+
+		.server-buttons {
+			padding: 0;
+			/* Empêche le débordement horizontal */
+			overflow-x: hidden;
+		}
+
+		.server-btn {
+			display: block;
+			width: 100%;
+			padding: 8px 12px;
+			background: transparent;
+			border: none;
+			text-align: left;
+			font-size: 0.9em;
+			cursor: pointer;
+			transition: background 0.2s;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.server-btn:hover {
+			background: #f0f0f0;
+		}
+
+		body.dark .server-btn {
+			color: #e0e0e0;
+		}
+
+		body.dark .server-btn:hover {
+			background: #444;
+		}
+
+		.logo {
+			width: 72px;
+			height: 72px;
+			margin-bottom: 18px;
+			border-radius: 16px;
+			box-shadow: 0 2px 12px #0001;
+			background: #fff;
+			padding: 8px;
+		}
+
+		.title {
+			font-size: 2em;
+			font-weight: 700;
+			letter-spacing: 1px;
+			color: #c00;
+			margin-bottom: 8px;
+		}
+
+		.loader {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 18px 0 10px 0;
+		}
+
+		.loader-dot {
+			width: 12px;
+			height: 12px;
+			margin: 0 4px;
+			border-radius: 50%;
+			background: #c00;
+			animation: bounce 1.2s infinite ease-in-out both;
+		}
+
+		.loader-dot:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+
+		.loader-dot:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+
+		@keyframes bounce {
+
+			0%,
+			80%,
+			100% {
+				transform: scale(0.7);
+				opacity: 0.5;
+			}
+
+			40% {
+				transform: scale(1.2);
+				opacity: 1;
+			}
+		}
+
+		.slogan {
+			font-size: 1em;
+			color: #888;
+			margin-bottom: 18px;
+		}
+
+		.theme-toggle {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			border: 1px solid #ddd;
+			background: #fff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 18px;
+			transition: all 0.2s;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		.theme-toggle:hover {
+			background: #f8f8f8;
+			transform: scale(1.05);
+		}
+
+		#server-form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			/* Espace en bas pour le dropdown */
+		}
+
+		#server-input {
+			padding: 8px 12px;
+			border-radius: 6px;
+			border: 1px solid #bbb;
+			font-size: 1em;
+			width: 260px;
+			background: #fff;
+			color: #222;
+			box-shadow: 0 1px 4px #0001;
+		}
+
+		#server-form button {
+			padding: 8px 24px;
+			background: #c00;
+			color: #fff;
+			border: none;
+			border-radius: 6px;
+			font-weight: 600;
+			font-size: 1em;
+			cursor: pointer;
+			transition: background 0.2s, box-shadow 0.2s;
+			box-shadow: 0 1px 4px #c001;
+		}
+
+		#server-form button:hover {
+			background: #a00;
+			box-shadow: 0 2px 8px #c002;
+		}
 	</style>
 </head>
+
 <body>
+	<div class="theme-toggle" id="theme-toggle" title="Basculer le thème">🌙</div>
 	<img src="assets/icon.ico" alt="Logo Liberchat" class="logo">
 	<div class="title">LIBERCHAT</div>
 	<div class="loader">
@@ -105,32 +274,179 @@
 		<div class="loader-dot"></div>
 	</div>
 	<div class="slogan">Votre messagerie, votre choix de serveur</div>
+
 	<form id="server-form">
-		<input id="server-input" type="text" placeholder="URL du serveur (ex: https://liberchat-3-0-1.onrender.com/)" value="https://liberchat-3-0-1.onrender.com/" required />
+		<div class="input-container">
+			<input id="server-input" type="text"
+				placeholder="URL du serveur (ex: https://liberchat.cnt-ait-contact.noho.st/liberchat)"
+				value="https://liberchat.cnt-ait-contact.noho.st/liberchat" required />
+			<div class="server-history" id="server-history" style="display: none;">
+				<div class="server-buttons" id="server-buttons"></div>
+			</div>
+		</div>
 		<button type="submit">Se connecter</button>
 		<div id="error-msg" style="color:#c00;font-size:0.95em;margin-top:6px;display:none;"></div>
 	</form>
+
 	<script>
-	function isValidURL(url) {
-		try {
-			const u = new URL(url);
-			return u.protocol === 'https:' || u.protocol === 'http:';
-		} catch {
-			return false;
+		// Charger le thème sauvegardé ou utiliser 'light' par défaut
+		let selectedTheme = localStorage.getItem('liberchat-theme') || 'light';
+
+		function isValidURL(url) {
+			try {
+				const u = new URL(url);
+				return u.protocol === 'https:' || u.protocol === 'http:';
+			} catch {
+				return false;
+			}
 		}
-	}
-	document.getElementById('server-form').addEventListener('submit', function(e) {
-		e.preventDefault();
-		const server = document.getElementById('server-input').value.trim();
-		const errorMsg = document.getElementById('error-msg');
-		if (!isValidURL(server)) {
-			errorMsg.textContent = "Veuillez saisir une URL valide (commençant par https:// ou http://).";
-			errorMsg.style.display = 'block';
-			return;
+
+		// Gestion de l'historique des serveurs
+		function getServerHistory() {
+			const history = localStorage.getItem('liberchat-servers');
+			return history ? JSON.parse(history) : [];
 		}
-		errorMsg.style.display = 'none';
-		window.electronAPI && window.electronAPI.selectServer(server);
-	});
+
+		function saveServerToHistory(serverUrl) {
+			let history = getServerHistory();
+
+			// Retirer le serveur s'il existe déjà
+			history = history.filter(s => s !== serverUrl);
+
+			// Ajouter en première position
+			history.unshift(serverUrl);
+
+			// Garder seulement les 3 derniers (réduit)
+			history = history.slice(0, 3);
+
+			localStorage.setItem('liberchat-servers', JSON.stringify(history));
+		}
+
+		function displayServerHistory() {
+			const history = getServerHistory();
+			const historyDiv = document.getElementById('server-history');
+			const buttonsDiv = document.getElementById('server-buttons');
+
+			if (history.length === 0) {
+				historyDiv.style.display = 'none';
+				return;
+			}
+
+			historyDiv.style.display = 'block';
+			buttonsDiv.innerHTML = '';
+
+			history.forEach(server => {
+				const btn = document.createElement('div');
+				btn.className = 'server-btn';
+
+				// Afficher seulement le nom de domaine
+				try {
+					const url = new URL(server);
+					btn.textContent = url.hostname;
+				} catch {
+					btn.textContent = server.substring(0, 20) + '...';
+				}
+
+				btn.title = server;
+				btn.addEventListener('click', function () {
+					console.log('Clic sur serveur:', server); // Debug
+					document.getElementById('server-input').value = server;
+					hideServerHistory(); // Masquer après sélection
+				});
+
+				buttonsDiv.appendChild(btn);
+			});
+		}
+
+		function showServerHistory() {
+			const history = getServerHistory();
+			if (history.length > 0) {
+				document.getElementById('server-history').style.display = 'block';
+			}
+		}
+
+		function hideServerHistory() {
+			document.getElementById('server-history').style.display = 'none';
+		}
+
+		// Appliquer le thème au chargement
+		function applyTheme(theme) {
+			const body = document.body;
+			const themeToggle = document.getElementById('theme-toggle');
+
+			if (theme === 'dark') {
+				body.classList.add('dark');
+				themeToggle.textContent = '☀️';
+				themeToggle.title = 'Passer au thème clair';
+			} else {
+				body.classList.remove('dark');
+				themeToggle.textContent = '🌙';
+				themeToggle.title = 'Passer au thème sombre';
+			}
+
+			// Sauvegarder le choix
+			localStorage.setItem('liberchat-theme', theme);
+		}
+
+		// Initialiser au chargement
+		document.addEventListener('DOMContentLoaded', function () {
+			console.log('Page chargée'); // Debug
+			applyTheme(selectedTheme);
+
+			// Préparer l'historique mais ne pas l'afficher au début
+			displayServerHistory();
+			hideServerHistory();
+
+			// Charger le dernier serveur utilisé
+			const history = getServerHistory();
+			console.log('Historique:', history); // Debug
+			if (history.length > 0) {
+				document.getElementById('server-input').value = history[0];
+			}
+
+			// Afficher l'historique quand on clique dans le champ
+			const serverInput = document.getElementById('server-input');
+			serverInput.addEventListener('focus', showServerHistory);
+			serverInput.addEventListener('click', showServerHistory);
+
+			// Masquer l'historique quand on clique ailleurs
+			document.addEventListener('click', function (e) {
+				const historyDiv = document.getElementById('server-history');
+				const serverInput = document.getElementById('server-input');
+
+				// Si on clique en dehors du champ et de l'historique
+				if (!historyDiv.contains(e.target) && e.target !== serverInput) {
+					hideServerHistory();
+				}
+			});
+		});
+
+		// Bouton de basculement de thème
+		const themeToggle = document.getElementById('theme-toggle');
+		themeToggle.addEventListener('click', function () {
+			selectedTheme = selectedTheme === 'light' ? 'dark' : 'light';
+			applyTheme(selectedTheme);
+		});
+
+		document.getElementById('server-form').addEventListener('submit', function (e) {
+			e.preventDefault();
+			const server = document.getElementById('server-input').value.trim();
+			const errorMsg = document.getElementById('error-msg');
+			if (!isValidURL(server)) {
+				errorMsg.textContent = "Veuillez saisir une URL valide (commençant par https:// ou http://).";
+				errorMsg.style.display = 'block';
+				return;
+			}
+			errorMsg.style.display = 'none';
+
+			// Sauvegarder dans l'historique
+			console.log('Sauvegarde serveur:', server); // Debug
+			saveServerToHistory(server);
+
+			// Envoyer le serveur
+			window.electronAPI && window.electronAPI.selectServer(server);
+		});
 	</script>
 </body>
+
 </html>

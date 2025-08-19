@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "package-mac": "electron-packager . liberchat --platform=darwin --arch=x64 --icon=assets/icons/liberchat.icns --overwrite"
+    "build-mac": "electron-builder --mac",
+    "package-mac": "electron-packager . liberchat --platform=darwin --arch=x64 --icon=assets/icons/liberchat.icns --overwrite",
+    "build-dmg": "./build-macos.sh"
   },
   "build": {
     "appId": "com.liberchat.desktop",
@@ -26,6 +28,19 @@
       ],
       "icon": "assets/icon.ico",
       "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/liberchat.icns",
+      "category": "public.app-category.social-networking",
+      "artifactName": "${productName}-${version}.${ext}"
     },
     "linux": {
       "target": [
@@ -81,8 +96,9 @@
     "email": "contact@liberchat.org"
   },
   "homepage": "https://github.com/Liberchat/Liberchat",
+
   "devDependencies": {
-    "electron": "^22.3.27",
+    "electron": "^37.3.1",
     "electron-builder": "^26.0.12",
     "electron-packager": "^17.1.2"
   }
