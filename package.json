@@ -8,7 +8,8 @@
     "build": "electron-builder",
     "build-mac": "electron-builder --mac",
     "package-mac": "electron-packager . liberchat --platform=darwin --arch=x64 --icon=assets/icons/liberchat.icns --overwrite",
-    "build-dmg": "./build-macos.sh"
+    "build-dmg": "./build-macos.sh",
+    "clean-build": "./clean-build.sh"
   },
   "build": {
     "appId": "com.liberchat.desktop",
