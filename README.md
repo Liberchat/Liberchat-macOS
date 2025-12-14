@@ -53,7 +53,7 @@
 - **Polices système** (-apple-system) pour un rendu parfait
 - **Animations fluides** optimisées pour macOS
 
-## 🚀 Installation & Lancement
+##  Installation & Lancement
 
 ```bash
 # Installer les dépendances
@@ -116,7 +116,7 @@ npx appdmg dmg.json liberchat-macos.dmg
 - `Cmd+,` : Ouvrir les préférences
 - `Cmd+H` : Masquer l'application
 
-## 🛠️ Dépendances
+##  Dépendances
 
 ### Principales
 - [Electron](https://www.electronjs.org/) ^22.x
@@ -170,7 +170,7 @@ liberchat-macos/
 - ✅ Dropdown intelligent sous le champ URL
 - ✅ Sauvegarde automatique des préférences
 
-#### ⚡ Performance & UX
+####  Performance & UX
 - ✅ Réduction de la dépendance webview
 - ✅ Cache intelligent pour les requêtes
 - ✅ Notifications natives macOS
