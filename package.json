@@ -5,8 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
-    "build-mac": "electron-builder --mac",
+    "build": "electron-builder --mac",
     "package-mac": "electron-packager . liberchat --platform=darwin --arch=x64 --icon=assets/icons/liberchat.icns --overwrite",
     "build-dmg": "./build-macos.sh",
     "clean-build": "./clean-build.sh"
@@ -17,18 +16,6 @@
     "icon": "assets/icons/liberchat",
     "directories": {
       "output": "dist"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "icon": "assets/icon.ico",
-      "artifactName": "${productName}-Setup-${version}.${ext}"
     },
     "mac": {
       "target": [
@@ -42,44 +29,6 @@
       "icon": "assets/icons/liberchat.icns",
       "category": "public.app-category.social-networking",
       "artifactName": "${productName}-${version}.${ext}"
-    },
-    "linux": {
-      "target": [
-        {
-          "target": "AppImage",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "deb",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "rpm",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "snap",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "category": "Network",
-      "icon": "assets/icons/256x256/liberchat.png",
-      "artifactName": "${productName}-${version}-${os}.${ext}",
-      "maintainer": "Liberchat Team <contact@liberchat.org>"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": true
     },
     "files": [
       "main.js",
@@ -97,9 +46,8 @@
     "email": "contact@liberchat.org"
   },
   "homepage": "https://github.com/Liberchat/Liberchat",
-
   "devDependencies": {
-    "electron": "^37.3.1",
+    "electron": "^41.1.1",
     "electron-builder": "^26.0.12",
     "electron-packager": "^17.1.2"
   }

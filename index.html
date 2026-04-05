@@ -11,7 +11,7 @@
 			margin: 0;
 			padding: 0;
 			overflow: hidden;
-			/* Empêche toutes les barres */
+			/* Prevent all bars */
 		}
 
 		body {
@@ -25,10 +25,10 @@
 			font-family: 'Segoe UI', Arial, sans-serif;
 			transition: all 0.3s ease;
 			padding: 20px 0;
-			/* Ajoute un peu d'espace en haut et en bas */
+			/* Add a little space top and bottom */
 		}
 
-		/* Thème sombre pour le splash screen */
+		/* Dark theme for splash screen */
 		body.dark {
 			background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
 			color: #e0e0e0;
@@ -71,13 +71,13 @@
 			background: #444;
 		}
 
-		/* Conteneur pour le champ et dropdown */
+		/* Container for input and dropdown */
 		.input-container {
 			position: relative;
 			width: 260px;
 		}
 
-		/* Sélecteur de serveurs récents */
+		/* Recent servers selector */
 		.server-history {
 			position: absolute;
 			top: 100%;
@@ -90,9 +90,9 @@
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 			z-index: 1000;
 			max-height: 120px;
-			/* Réduit encore plus */
+			/* Reduced even more */
 			overflow: hidden;
-			/* Pas de scroll */
+			/* No scroll */
 			max-width: 260px;
 			box-sizing: border-box;
 		}
@@ -106,7 +106,7 @@
 
 		.server-buttons {
 			padding: 0;
-			/* Empêche le débordement horizontal */
+			/* Prevent horizontal overflow */
 			overflow-x: hidden;
 		}
 
@@ -265,31 +265,31 @@
 </head>
 
 <body>
-	<div class="theme-toggle" id="theme-toggle" title="Basculer le thème">🌙</div>
-	<img src="assets/icon.ico" alt="Logo Liberchat" class="logo">
+	<div class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</div>
+	<img src="assets/icon.ico" alt="Liberchat Logo" class="logo">
 	<div class="title">LIBERCHAT</div>
 	<div class="loader">
 		<div class="loader-dot"></div>
 		<div class="loader-dot"></div>
 		<div class="loader-dot"></div>
 	</div>
-	<div class="slogan">Votre messagerie, votre choix de serveur</div>
+	<div class="slogan">Your messaging, your choice of server</div>
 
 	<form id="server-form">
 		<div class="input-container">
 			<input id="server-input" type="text"
-				placeholder="URL du serveur (ex: https://liberchat.cnt-ait-contact.noho.st/liberchat)"
+				placeholder="Server URL (e.g., https://liberchat.cnt-ait-contact.noho.st/liberchat)"
 				value="https://liberchat.cnt-ait-contact.noho.st/liberchat" required />
 			<div class="server-history" id="server-history" style="display: none;">
 				<div class="server-buttons" id="server-buttons"></div>
 			</div>
 		</div>
-		<button type="submit">Se connecter</button>
+		<button type="submit">Connect</button>
 		<div id="error-msg" style="color:#c00;font-size:0.95em;margin-top:6px;display:none;"></div>
 	</form>
 
 	<script>
-		// Charger le thème sauvegardé ou utiliser 'light' par défaut
+		// Load saved theme or use 'light' by default
 		let selectedTheme = localStorage.getItem('liberchat-theme') || 'light';
 
 		function isValidURL(url) {
@@ -301,7 +301,7 @@
 			}
 		}
 
-		// Gestion de l'historique des serveurs
+		// Server history management
 		function getServerHistory() {
 			const history = localStorage.getItem('liberchat-servers');
 			return history ? JSON.parse(history) : [];
@@ -310,13 +310,13 @@
 		function saveServerToHistory(serverUrl) {
 			let history = getServerHistory();
 
-			// Retirer le serveur s'il existe déjà
+			// Remove the server if it already exists
 			history = history.filter(s => s !== serverUrl);
 
-			// Ajouter en première position
+			// Add to the first position
 			history.unshift(serverUrl);
 
-			// Garder seulement les 3 derniers (réduit)
+			// Keep only the last 3 (reduced)
 			history = history.slice(0, 3);
 
 			localStorage.setItem('liberchat-servers', JSON.stringify(history));
@@ -339,7 +339,7 @@
 				const btn = document.createElement('div');
 				btn.className = 'server-btn';
 
-				// Afficher seulement le nom de domaine
+				// Only display the domain name
 				try {
 					const url = new URL(server);
 					btn.textContent = url.hostname;
@@ -349,9 +349,9 @@
 
 				btn.title = server;
 				btn.addEventListener('click', function () {
-					console.log('Clic sur serveur:', server); // Debug
+					console.log('Clicked server:', server); // Debug
 					document.getElementById('server-input').value = server;
-					hideServerHistory(); // Masquer après sélection
+					hideServerHistory(); // Hide after selection
 				});
 
 				buttonsDiv.appendChild(btn);
@@ -369,7 +369,7 @@
 			document.getElementById('server-history').style.display = 'none';
 		}
 
-		// Appliquer le thème au chargement
+		// Apply the theme on load
 		function applyTheme(theme) {
 			const body = document.body;
 			const themeToggle = document.getElementById('theme-toggle');
@@ -377,51 +377,51 @@
 			if (theme === 'dark') {
 				body.classList.add('dark');
 				themeToggle.textContent = '☀️';
-				themeToggle.title = 'Passer au thème clair';
+				themeToggle.title = 'Switch to light theme';
 			} else {
 				body.classList.remove('dark');
 				themeToggle.textContent = '🌙';
-				themeToggle.title = 'Passer au thème sombre';
+				themeToggle.title = 'Switch to dark theme';
 			}
 
-			// Sauvegarder le choix
+			// Save the choice
 			localStorage.setItem('liberchat-theme', theme);
 		}
 
-		// Initialiser au chargement
+		// Initialize on load
 		document.addEventListener('DOMContentLoaded', function () {
-			console.log('Page chargée'); // Debug
+			console.log('Page loaded'); // Debug
 			applyTheme(selectedTheme);
 
-			// Préparer l'historique mais ne pas l'afficher au début
+			// Prepare the history but do not display it at first
 			displayServerHistory();
 			hideServerHistory();
 
-			// Charger le dernier serveur utilisé
+			// Load the last used server
 			const history = getServerHistory();
-			console.log('Historique:', history); // Debug
+			console.log('History:', history); // Debug
 			if (history.length > 0) {
 				document.getElementById('server-input').value = history[0];
 			}
 
-			// Afficher l'historique quand on clique dans le champ
+			// Display the history when clicking in the field
 			const serverInput = document.getElementById('server-input');
 			serverInput.addEventListener('focus', showServerHistory);
 			serverInput.addEventListener('click', showServerHistory);
 
-			// Masquer l'historique quand on clique ailleurs
+			// Hide the history when clicking elsewhere
 			document.addEventListener('click', function (e) {
 				const historyDiv = document.getElementById('server-history');
 				const serverInput = document.getElementById('server-input');
 
-				// Si on clique en dehors du champ et de l'historique
+				// If clicking outside the field and history
 				if (!historyDiv.contains(e.target) && e.target !== serverInput) {
 					hideServerHistory();
 				}
 			});
 		});
 
-		// Bouton de basculement de thème
+		// Theme toggle button
 		const themeToggle = document.getElementById('theme-toggle');
 		themeToggle.addEventListener('click', function () {
 			selectedTheme = selectedTheme === 'light' ? 'dark' : 'light';
@@ -433,17 +433,17 @@
 			const server = document.getElementById('server-input').value.trim();
 			const errorMsg = document.getElementById('error-msg');
 			if (!isValidURL(server)) {
-				errorMsg.textContent = "Veuillez saisir une URL valide (commençant par https:// ou http://).";
+				errorMsg.textContent = "Please enter a valid URL (starting with https:// or http://).";
 				errorMsg.style.display = 'block';
 				return;
 			}
 			errorMsg.style.display = 'none';
 
-			// Sauvegarder dans l'historique
-			console.log('Sauvegarde serveur:', server); // Debug
+			// Save to history
+			console.log('Saving server:', server); // Debug
 			saveServerToHistory(server);
 
-			// Envoyer le serveur
+			// Send the server
 			window.electronAPI && window.electronAPI.selectServer(server);
 		});
 	</script>

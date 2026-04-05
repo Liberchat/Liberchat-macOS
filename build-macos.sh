@@ -1,49 +1,49 @@
 #!/bin/bash
 
-# Script de compilation Liberchat macOS avec DMG
+# Liberchat macOS compilation script with DMG
 # Usage: ./build-macos.sh
 
 set -e
 
-echo "🚀 Compilation Liberchat macOS v2.0.0"
+echo " Compiling Liberchat macOS v2.0.0"
 echo "======================================"
 
-# Vérifier que nous sommes sur macOS
+# Check if we are on macOS
 if [[ "$OSTYPE" != "darwin"* ]]; then
-    echo "❌ Ce script doit être exécuté sur macOS"
+    echo "❌ This script must be run on macOS"
     exit 1
 fi
 
-# Nettoyer les builds précédents
-echo "🧹 Nettoyage des builds précédents..."
+# Clean previous builds
+echo " Cleaning previous builds..."
 rm -rf liberchat-darwin-x64/
 rm -rf dist/
 rm -f *.dmg
 
-# Installer les dépendances
-echo "📦 Installation des dépendances..."
+# Install dependencies
+echo " Installing dependencies..."
 npm install
 
-# Compiler l'application
-echo "⚙️ Compilation de l'application..."
+# Compile application
+echo " Compiling the application..."
 npm run package-mac
 
-# Vérifier que l'app a été créée
+# Verify app was created
 if [ ! -d "liberchat-darwin-x64/liberchat.app" ]; then
-    echo "❌ Erreur: L'application n'a pas été créée"
+    echo "❌ Error: The application was not created"
     exit 1
 fi
 
-echo "✅ Application compilée avec succès"
+echo " Application compiled successfully"
 
-# Installer create-dmg si nécessaire
+# Install create-dmg if necessary
 if ! command -v create-dmg &> /dev/null; then
-    echo "📥 Installation de create-dmg..."
+    echo " Installing create-dmg..."
     brew install create-dmg
 fi
 
-# Créer le DMG
-echo "💿 Création du fichier DMG..."
+# Create DMG
+echo "💿 Creating DMG file..."
 create-dmg \
   --volname "Liberchat" \
   --volicon "assets/icons/liberchat.icns" \
@@ -57,12 +57,12 @@ create-dmg \
   "liberchat-darwin-x64/"
 
 echo ""
-echo "🎉 Compilation terminée avec succès !"
-echo "📁 Fichiers générés :"
+echo " Compilation completed successfully!"
+echo " Generated files:"
 echo "   • liberchat-darwin-x64/liberchat.app"
 echo "   • liberchat-macos-v2.0.0.dmg"
 echo ""
-echo "📋 Installation :"
-echo "   1. Double-cliquez sur liberchat-macos-v2.0.0.dmg"
-echo "   2. Glissez Liberchat dans Applications"
+echo " Installation:"
+echo "   1. Double-click on liberchat-macos-v2.0.0.dmg"
+echo "   2. Drag Liberchat to Applications"
 echo ""

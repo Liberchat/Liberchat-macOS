@@ -41,7 +41,7 @@ function createWindow() {
         center: true,
         show: false,
         autoHideMenuBar: true,
-        // Fonctionnalités macOS exclusives
+        // Exclusive macOS features
         titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
         vibrancy: process.platform === 'darwin' ? 'under-window' : undefined,
         transparent: process.platform === 'darwin',
@@ -57,26 +57,26 @@ function createWindow() {
         }
     });
 
-    // Fonctionnalités macOS exclusives
+    // Exclusive macOS features
     if (process.platform === 'darwin') {
         setupMacOSFeatures();
     }
 
-    // Charger Liberchat avec améliorations natives
+    // Load Liberchat with native improvements
     mainWindow.loadURL(selectedServer);
 
-    // Injecter des améliorations natives une fois la page chargée
+    // Inject native improvements once the page is loaded
     mainWindow.webContents.on('dom-ready', () => {
         injectNativeEnhancements();
     });
 
-    // Intercepter les notifications pour les rendre natives
+    // Intercept notifications to make them native
     mainWindow.webContents.on('notification', (event, notification) => {
         event.preventDefault();
         const { Notification } = require('electron');
         new Notification({
             title: 'Liberchat',
-            body: notification.body || 'Nouveau message',
+            body: notification.body || 'New message',
             icon: path.join(__dirname, 'assets', 'icons', 'liberchat.png')
         }).show();
     });
@@ -86,7 +86,7 @@ function createWindow() {
         mainWindow.show();
     });
 
-    // Comportement macOS : masquer au lieu de fermer
+    // macOS behavior: hide instead of close
     if (process.platform === 'darwin') {
         mainWindow.on('close', (event) => {
             if (!app.isQuitting) {
@@ -97,14 +97,14 @@ function createWindow() {
     }
 }
 
-// Injecter des améliorations natives dans la webview
+// Inject native improvements into the webview
 function injectNativeEnhancements() {
     const enhancements = `
         (function() {
-            // Cache local pour réduire les requêtes
+            // Local cache to reduce requests
             const cache = new Map();
             
-            // Intercepter fetch pour ajouter du cache
+            // Intercept fetch to add cache
             const originalFetch = window.fetch;
             window.fetch = function(...args) {
                 const url = args[0];
@@ -119,16 +119,16 @@ function injectNativeEnhancements() {
                 });
             };
             
-            // Améliorer l'interface utilisateur
+            // Enhance user interface
             const style = document.createElement('style');
             style.textContent = \`
-                /* Améliorations natives */
+                /* Native improvements */
                 body {
                     -webkit-font-smoothing: antialiased !important;
                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
                 }
                 
-                /* Scrollbars natives macOS */
+                /* Native macOS scrollbars */
                 ::-webkit-scrollbar {
                     width: 8px;
                     height: 8px;
@@ -144,14 +144,14 @@ function injectNativeEnhancements() {
                     background: rgba(0,0,0,0.3);
                 }
                 
-                /* Améliorer les animations */
+                /* Improve animations */
                 * {
                     transition: all 0.2s ease !important;
                 }
             \`;
             document.head.appendChild(style);
             
-            // Notifications natives
+            // Native notifications
             if ('Notification' in window) {
                 const originalNotification = window.Notification;
                 window.Notification = function(title, options) {
@@ -160,83 +160,83 @@ function injectNativeEnhancements() {
                 };
             }
             
-            console.log('✅ Améliorations natives Liberchat activées');
+            console.log('✅ Liberchat native improvements activated');
         })();
     `;
 
     mainWindow.webContents.executeJavaScript(enhancements);
 }
 
-// Fonctionnalités exclusives macOS
+// Exclusive macOS features
 function setupMacOSFeatures() {
-    // 1. Menu macOS natif
+    // 1. Native macOS menu
     createMacOSMenu();
     
-    // 2. Icône dans la barre de menu (Tray)
+    // 2. Menu bar icon (Tray)
     createTrayIcon();
     
-    // 3. Touch Bar support (si disponible)
+    // 3. Touch Bar support (if available)
     setupTouchBar();
     
-    // 4. Thème système automatique
+    // 4. Automatic system theme
     setupSystemTheme();
     
-    // 5. Fenêtre avec vibrancy (effet de transparence)
+    // 5. Window with vibrancy (transparency effect)
     mainWindow.setVibrancy('under-window');
 }
 
-// Menu macOS natif
+// Native macOS menu
 function createMacOSMenu() {
     const template = [
         {
             label: 'Liberchat',
             submenu: [
-                { label: 'À propos de Liberchat', role: 'about' },
+                { label: 'About Liberchat', role: 'about' },
                 { type: 'separator' },
-                { label: 'Préférences...', accelerator: 'Cmd+,', click: () => openPreferences() },
+                { label: 'Preferences...', accelerator: 'Cmd+,', click: () => openPreferences() },
                 { type: 'separator' },
                 { label: 'Services', role: 'services', submenu: [] },
                 { type: 'separator' },
-                { label: 'Masquer Liberchat', accelerator: 'Cmd+H', role: 'hide' },
-                { label: 'Masquer les autres', accelerator: 'Cmd+Alt+H', role: 'hideothers' },
-                { label: 'Tout afficher', role: 'unhide' },
+                { label: 'Hide Liberchat', accelerator: 'Cmd+H', role: 'hide' },
+                { label: 'Hide Others', accelerator: 'Cmd+Alt+H', role: 'hideothers' },
+                { label: 'Show All', role: 'unhide' },
                 { type: 'separator' },
-                { label: 'Quitter', accelerator: 'Cmd+Q', click: () => app.quit() }
+                { label: 'Quit', accelerator: 'Cmd+Q', click: () => app.quit() }
             ]
         },
         {
-            label: 'Édition',
+            label: 'Edit',
             submenu: [
-                { label: 'Annuler', accelerator: 'Cmd+Z', role: 'undo' },
-                { label: 'Rétablir', accelerator: 'Shift+Cmd+Z', role: 'redo' },
+                { label: 'Undo', accelerator: 'Cmd+Z', role: 'undo' },
+                { label: 'Redo', accelerator: 'Shift+Cmd+Z', role: 'redo' },
                 { type: 'separator' },
-                { label: 'Couper', accelerator: 'Cmd+X', role: 'cut' },
-                { label: 'Copier', accelerator: 'Cmd+C', role: 'copy' },
-                { label: 'Coller', accelerator: 'Cmd+V', role: 'paste' },
-                { label: 'Tout sélectionner', accelerator: 'Cmd+A', role: 'selectall' }
+                { label: 'Cut', accelerator: 'Cmd+X', role: 'cut' },
+                { label: 'Copy', accelerator: 'Cmd+C', role: 'copy' },
+                { label: 'Paste', accelerator: 'Cmd+V', role: 'paste' },
+                { label: 'Select All', accelerator: 'Cmd+A', role: 'selectall' }
             ]
         },
         {
-            label: 'Affichage',
+            label: 'View',
             submenu: [
-                { label: 'Recharger', accelerator: 'Cmd+R', click: () => mainWindow.reload() },
-                { label: 'Forcer le rechargement', accelerator: 'Cmd+Shift+R', click: () => mainWindow.webContents.reloadIgnoringCache() },
-                { label: 'Outils de développement', accelerator: 'F12', click: () => mainWindow.webContents.toggleDevTools() },
+                { label: 'Reload', accelerator: 'Cmd+R', click: () => mainWindow.reload() },
+                { label: 'Force Reload', accelerator: 'Cmd+Shift+R', click: () => mainWindow.webContents.reloadIgnoringCache() },
+                { label: 'Developer Tools', accelerator: 'F12', click: () => mainWindow.webContents.toggleDevTools() },
                 { type: 'separator' },
-                { label: 'Zoom avant', accelerator: 'Cmd+Plus', click: () => mainWindow.webContents.zoomIn() },
-                { label: 'Zoom arrière', accelerator: 'Cmd+-', click: () => mainWindow.webContents.zoomOut() },
-                { label: 'Zoom réel', accelerator: 'Cmd+0', click: () => mainWindow.webContents.zoomLevel = 0 },
+                { label: 'Zoom In', accelerator: 'Cmd+Plus', click: () => mainWindow.webContents.zoomIn() },
+                { label: 'Zoom Out', accelerator: 'Cmd+-', click: () => mainWindow.webContents.zoomOut() },
+                { label: 'Actual Size', accelerator: 'Cmd+0', click: () => mainWindow.webContents.zoomLevel = 0 },
                 { type: 'separator' },
-                { label: 'Plein écran', accelerator: 'Ctrl+Cmd+F', role: 'togglefullscreen' }
+                { label: 'Toggle Full Screen', accelerator: 'Ctrl+Cmd+F', role: 'togglefullscreen' }
             ]
         },
         {
-            label: 'Fenêtre',
+            label: 'Window',
             submenu: [
-                { label: 'Réduire', accelerator: 'Cmd+M', role: 'minimize' },
-                { label: 'Fermer', accelerator: 'Cmd+W', role: 'close' },
+                { label: 'Minimize', accelerator: 'Cmd+M', role: 'minimize' },
+                { label: 'Close', accelerator: 'Cmd+W', role: 'close' },
                 { type: 'separator' },
-                { label: 'Tout mettre au premier plan', role: 'front' }
+                { label: 'Bring All to Front', role: 'front' }
             ]
         }
     ];
@@ -245,21 +245,21 @@ function createMacOSMenu() {
     Menu.setApplicationMenu(menu);
 }
 
-// Icône dans la barre de menu
+// Menu bar icon
 function createTrayIcon() {
     tray = new Tray(path.join(__dirname, 'assets', 'icons', 'liberchat.png'));
     
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Ouvrir Liberchat', click: () => mainWindow.show() },
-        { label: 'Nouveau message', click: () => focusMessageInput() },
+        { label: 'Open Liberchat', click: () => mainWindow.show() },
+        { label: 'New Message', click: () => focusMessageInput() },
         { type: 'separator' },
-        { label: 'Quitter', click: () => app.quit() }
+        { label: 'Quit', click: () => app.quit() }
     ]);
     
-    tray.setToolTip('Liberchat - Messagerie moderne');
+    tray.setToolTip('Liberchat - Modern Messaging');
     tray.setContextMenu(contextMenu);
     
-    // Clic sur l'icône pour afficher/masquer
+    // Click on the icon to show/hide
     tray.on('click', () => {
         if (mainWindow.isVisible()) {
             mainWindow.hide();
@@ -269,7 +269,7 @@ function createTrayIcon() {
     });
 }
 
-// Touch Bar (pour MacBook Pro avec Touch Bar)
+// Touch Bar (for MacBook Pro with Touch Bar)
 function setupTouchBar() {
     if (process.platform === 'darwin') {
         const { TouchBar } = require('electron');
@@ -278,18 +278,18 @@ function setupTouchBar() {
         const touchBar = new TouchBar({
             items: [
                 new TouchBarButton({
-                    label: '💬 Nouveau',
+                    label: '💬 New',
                     backgroundColor: '#c00',
                     click: () => focusMessageInput()
                 }),
                 new TouchBarSpacer({ size: 'small' }),
                 new TouchBarButton({
-                    label: '🔄 Actualiser',
+                    label: '🔄 Refresh',
                     click: () => mainWindow.reload()
                 }),
                 new TouchBarSpacer({ size: 'small' }),
                 new TouchBarButton({
-                    label: '⚙️ Paramètres',
+                    label: '⚙️ Settings',
                     click: () => openPreferences()
                 })
             ]
@@ -299,9 +299,9 @@ function setupTouchBar() {
     }
 }
 
-// Thème système automatique
+// Automatic system theme
 function setupSystemTheme() {
-    // Suivre les changements de thème système
+    // Track system theme changes
     nativeTheme.on('updated', () => {
         const isDark = nativeTheme.shouldUseDarkColors;
         mainWindow.webContents.executeJavaScript(`
@@ -310,16 +310,16 @@ function setupSystemTheme() {
     });
 }
 
-// Fonctions utilitaires
+// Utility functions
 function openPreferences() {
-    // Ouvrir une fenêtre de préférences (à implémenter)
-    console.log('Ouverture des préférences...');
+    // Open a preferences window (to be implemented)
+    console.log('Opening preferences...');
 }
 
 function focusMessageInput() {
     mainWindow.show();
     mainWindow.focus();
-    // Focus sur le champ de message dans la webview
+    // Focus on the message field in the webview
     mainWindow.webContents.executeJavaScript(`
         const messageInput = document.querySelector('textarea, input[type="text"]');
         if (messageInput) messageInput.focus();
@@ -339,7 +339,7 @@ app.whenReady().then(() => {
         return true;
     });
 
-    // Notifications natives
+    // Native notifications
     ipcMain.handle('show-notification', async (event, title, options) => {
         const { Notification } = require('electron');
         new Notification({
@@ -370,7 +370,7 @@ app.on('window-all-closed', () => {
     }
 });
 
-// macOS : Réactiver l'app quand on clique sur l'icône du dock
+// macOS: Reactivate the app when clicking on the dock icon
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createSplash();
@@ -379,7 +379,7 @@ app.on('activate', () => {
     }
 });
 
-// macOS : Gérer la fermeture proprement
+// macOS: Handle quit properly
 app.on('before-quit', () => {
     app.isQuitting = true;
 });

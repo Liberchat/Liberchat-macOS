@@ -5,200 +5,200 @@
   
   <h1 style="margin-top: 0;">Liberchat MacOS Desktop</h1>
   
-  <a href="https://github.com/Liberchat/Liberchat">Projet principal sur GitHub</a>
+  <a href="https://github.com/Liberchat/Liberchat">Main project on GitHub</a>
   
   <br/>
   
   <img src="https://img.shields.io/badge/Electron-22.x-blue?logo=electron"/>
-  <img src="https://img.shields.io/badge/MacOS-Natif-success?logo=apple"/>
+  <img src="https://img.shields.io/badge/MacOS-Native-success?logo=apple"/>
   <img src="https://img.shields.io/badge/UI-Native-red"/>
   <img src="https://img.shields.io/badge/TouchBar-Support-orange"/>
   <img src="https://img.shields.io/badge/license-MIT-green"/>
   
   <br/>
-  <em>Application de messagerie moderne avec fonctionnalités natives macOS exclusives.</em>
+  <em>Modern messaging application with exclusive native macOS features.</em>
 </div>
 
-## ✨ Fonctionnalités principales
+##  Key Features
 
-### Interface moderne
-- **Splash screen intelligent** avec sélection de serveur et thème
-- **Historique des serveurs** : Sauvegarde des 3 derniers serveurs utilisés
-- **Thème adaptatif** : Mode sombre/clair avec sauvegarde des préférences
-- **Interface optimisée** : Réduction de la dépendance webview avec améliorations natives
+### Modern Interface
+- **Smart splash screen** with server selection and theme
+- **Server history**: Saves the last 3 servers used
+- **Adaptive theme**: Dark/light mode with saved preferences
+- **Optimized interface**: Reduced webview dependence with native improvements
 
-### Sécurité & Performance
-- **Sécurité renforcée** : contextIsolation, preload sécurisé
-- **Cache intelligent** : Réduction des requêtes réseau
-- **Notifications natives** : Intégration système complète
-- **Permissions automatiques** : Micro/caméra configurés
+### Security & Performance
+- **Enhanced security**: contextIsolation, secured preload
+- **Smart cache**: Reduced network requests
+- **Native notifications**: Complete system integration
+- **Automatic permissions**: Mic/camera configured
 
-## 🍎 Fonctionnalités exclusives macOS
+##  Exclusive macOS Features
 
-### Interface native
-- **Menu macOS complet** avec raccourcis Cmd+ natifs
-- **Barre de titre cachée** avec effet vibrancy
-- **Fenêtre transparente** intégrée au système
-- **Thème système automatique** (suit Dark/Light mode)
+### Native Interface
+- **Complete macOS menu** with native Cmd+ shortcuts
+- **Hidden title bar** with vibrancy effect
+- **Transparent window** integrated with the system
+- **Automatic system theme** (follows Dark/Light mode)
 
-### Productivité
-- **Icône barre de menu** : Accès rapide et menu contextuel
-- **Touch Bar** : Boutons rapides (Nouveau message, Actualiser, Paramètres)
-- **Comportement natif** : Fermeture = masquer, réactivation depuis le Dock
-- **Raccourcis système** : Cmd+Q, Cmd+W, Cmd+M, Cmd+R, Cmd+,
+### Productivity
+- **Menu bar icon**: Quick access and context menu
+- **Touch Bar**: Quick buttons (New message, Refresh, Settings)
+- **Native behavior**: Close = hide, reactivate from Dock
+- **System shortcuts**: Cmd+Q, Cmd+W, Cmd+M, Cmd+R, Cmd+,
 
-### Intégration système
-- **Notifications macOS** natives avec son et badges
-- **Scrollbars natives** avec style macOS
-- **Polices système** (-apple-system) pour un rendu parfait
-- **Animations fluides** optimisées pour macOS
+### System Integration
+- **Native macOS notifications** with sound and badges
+- **Native scrollbars** with macOS style
+- **System fonts** (-apple-system) for perfect rendering
+- **Smooth animations** optimized for macOS
 
-##  Installation & Lancement
+##  Installation & Launch
 
 ```bash
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Lancer en mode développement
+# Launch in development mode
 npm start
 
-# Générer l'application MacOS (dossier .app)
+# Generate macOS app (.app folder)
 npm run package-mac
 
-# Générer le fichier DMG (installateur Mac)
+# Generate DMG file (Mac installer)
 npx appdmg dmg.json liberchat-macos.dmg
 ```
 
-### Fichiers générés
-- `liberchat-darwin-x64/liberchat.app` (application MacOS)
-- `liberchat-macos.dmg` (installateur DMG)
+### Generated Files
+- `liberchat-darwin-x64/liberchat.app` (macOS Application)
+- `liberchat-macos.dmg` (DMG Installer)
 
-## 📦 Installation sur MacOS
+##  macOS Installation
 
-### Méthode recommandée (DMG)
-1. Télécharge `liberchat-macos.dmg`
-2. Double-clique pour monter l'image disque
-3. Glisse l'icône Liberchat dans le dossier Applications
-4. Lance depuis le Launchpad ou Applications
+### Recommended Method (DMG)
+1. Download `liberchat-macos.dmg`
+2. Double-click to mount the disk image
+3. Drag the Liberchat icon into the Applications folder
+4. Launch from Launchpad or Applications
 
-### Méthode alternative (.app)
-- Copie `liberchat-darwin-x64/liberchat.app` dans `/Applications/`
+### Alternative Method (.app)
+- Copy `liberchat-darwin-x64/liberchat.app` to `/Applications/`
 
-## ⚙️ Configuration
+##  Configuration
 
-### Premier lancement
-1. **Sélection du serveur** : Choisis ton serveur Liberchat
-2. **Thème** : Clique sur 🌙/☀️ pour basculer entre clair/sombre
-3. **Historique** : Les serveurs récents apparaîtront automatiquement
+### First Launch
+1. **Server selection**: Choose your Liberchat server
+2. **Theme**: Click on 🌙/☀️ to toggle between light/dark
+3. **History**: Recent servers will appear automatically
 
-### Fonctionnalités avancées
-- **Menu barre** : Clique sur l'icône Liberchat dans la barre de menu
-- **Touch Bar** : Utilise les boutons rapides (MacBook Pro)
-- **Raccourcis** : Cmd+, pour les préférences, Cmd+R pour actualiser
+### Advanced Features
+- **Menu bar**: Click on the Liberchat icon in the menu bar
+- **Touch Bar**: Use the quick buttons (MacBook Pro)
+- **Shortcuts**: Cmd+, for preferences, Cmd+R to refresh
 
-## 🎯 Utilisation
+##  Usage
 
-### Sélection rapide de serveur
-- **Clic dans le champ URL** → Affiche les serveurs récents
-- **Sélection** → Remplit automatiquement le champ
-- **Sauvegarde automatique** des 3 derniers serveurs
+### Quick Server Selection
+- **Click in URL field** → Shows recent servers
+- **Selection** → Automatically fills the field
+- **Auto-save** of the last 3 servers
 
-### Thèmes
-- **Bouton toggle** en haut à droite du splash screen
-- **Sauvegarde automatique** du choix
-- **Thème système** : Suit automatiquement les préférences macOS
+### Themes
+- **Toggle button** at the top right of the splash screen
+- **Auto-save** of the choice
+- **System theme**: Automatically follows macOS preferences
 
-### Raccourcis macOS
-- `Cmd+Q` : Quitter l'application
-- `Cmd+W` : Fermer la fenêtre (masque l'app)
-- `Cmd+M` : Réduire dans le Dock
-- `Cmd+R` : Recharger la page
-- `Cmd+,` : Ouvrir les préférences
-- `Cmd+H` : Masquer l'application
+### macOS Shortcuts
+- `Cmd+Q`: Quit the application
+- `Cmd+W`: Close window (hides app)
+- `Cmd+M`: Minimize to Dock
+- `Cmd+R`: Reload page
+- `Cmd+,`: Open preferences
+- `Cmd+H`: Hide application
 
-##  Dépendances
+## Dependencies
 
-### Principales
+### Main
 - [Electron](https://www.electronjs.org/) ^22.x
 - [electron-packager](https://github.com/electron/electron-packager)
 - [appdmg](https://github.com/LinusU/node-appdmg)
 
-### APIs macOS utilisées
-- **Tray** : Icône barre de menu
-- **TouchBar** : Support MacBook Pro
-- **nativeTheme** : Thème système
-- **systemPreferences** : Intégration système
-- **Menu** : Menus natifs macOS
+### macOS APIs Used
+- **Tray**: Menu bar icon
+- **TouchBar**: MacBook Pro support
+- **nativeTheme**: System theme
+- **systemPreferences**: System integration
+- **Menu**: Native macOS menus
 
-## 🔧 Développement
+##  Development
 
-### Structure du projet
+### Project Structure
 ```
 liberchat-macos/
-├── main.js              # Processus principal Electron
-├── preload.js           # Script de préchargement sécurisé
-├── index.html           # Splash screen avec sélecteur
-├── assets/              # Icônes et ressources
+├── main.js              # Main Electron process
+├── preload.js           # Secured preload script
+├── index.html           # Splash screen with selector
+├── assets/              # Icons and resources
 │   └── icons/
 │       ├── liberchat.icns
 │       └── liberchat.png
-├── package.json         # Configuration npm
+├── package.json         # npm configuration
 └── README-macos.md      # Documentation
 ```
 
-### Fonctionnalités techniques
-- **Processus isolés** : Sécurité maximale
-- **IPC sécurisé** : Communication entre processus
-- **Cache local** : localStorage pour l'historique
-- **Détection plateforme** : Fonctionnalités conditionnelles macOS
+### Technical Features
+- **Isolated processes**: Maximum security
+- **Secured IPC**: Inter-process communication
+- **Local cache**: localStorage for history
+- **Platform detection**: macOS conditional features
 
-## 📋 Changelog
+##  Changelog
 
-### Version 2.0.0 - Édition macOS Native ✨
-**Nouvelles fonctionnalités majeures :**
+### Version 2.0.0 - Native macOS Edition ✨
+**Major new features:**
 
-#### 🍎 Intégration macOS native
-- ✅ Menu macOS complet avec raccourcis Cmd+
-- ✅ Icône dans la barre de menu avec menu contextuel
-- ✅ Support Touch Bar pour MacBook Pro
-- ✅ Effet Vibrancy et fenêtre transparente
-- ✅ Thème système automatique (Dark/Light mode)
+####  Native macOS Integration
+-  Complete macOS menu with Cmd+ shortcuts
+-  Menu bar icon with context menu
+-  Touch Bar support for MacBook Pro
+-  Vibrancy effect and transparent window
+-  Automatic system theme (Dark/Light mode)
 
-#### 🎨 Interface améliorée
-- ✅ Splash screen avec sélecteur de thème (🌙/☀️)
-- ✅ Historique des 3 derniers serveurs utilisés
-- ✅ Dropdown intelligent sous le champ URL
-- ✅ Sauvegarde automatique des préférences
+####  Improved Interface
+-  Splash screen with theme selector (🌙/☀️)
+-  History of last 3 used servers
+-  Smart dropdown under the URL field
+-  Automatic save of preferences
 
 ####  Performance & UX
-- ✅ Réduction de la dépendance webview
-- ✅ Cache intelligent pour les requêtes
-- ✅ Notifications natives macOS
-- ✅ Scrollbars et polices système natives
-- ✅ Comportement natif (fermeture = masquer)
+-  Reduced webview dependence
+-  Smart cache for requests
+-  Native macOS notifications
+-  Native system fonts and scrollbars
+-  Native behavior (close = hide)
 
-#### 🔧 Améliorations techniques
-- ✅ Architecture sécurisée avec processus isolés
-- ✅ IPC sécurisé entre processus
-- ✅ Gestion d'état locale (localStorage)
-- ✅ Détection de plateforme conditionnelle
+####  Technical Improvements
+-  Secured architecture with isolated processes
+-  Secured IPC between processes
+-  Local state management (localStorage)
+-  Conditional platform detection
 
-## 📄 Licence
+##  License
 
-MIT License - Voir le fichier LICENSE pour plus de détails.
+MIT License - See the LICENSE file for details.
 
-## 🤝 Contribution
+##  Contribution
 
-Les contributions sont les bienvenues ! N'hésite pas à :
-- Signaler des bugs
-- Proposer des améliorations
-- Ajouter des fonctionnalités macOS
+Contributions are welcome! Feel free to:
+- Report bugs
+- Propose enhancements
+- Add macOS features
 
 ---
 
 <div align="center">
   <strong>Liberchat macOS Desktop v2.0.0</strong><br/>
-  <em>Application native avec intégration système complète</em><br/>
+  <em>Native application with full system integration</em><br/>
   <br/>
   <img src="https://img.shields.io/badge/Version-2.0.0-brightgreen?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/macOS-Native-blue?style=for-the-badge&logo=apple"/>

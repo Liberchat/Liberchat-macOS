@@ -1,41 +1,41 @@
-# 🛠️ Compilation Liberchat macOS
+#  Liberchat macOS Compilation
 
-## Prérequis
+## Prerequisites
 
-- **macOS** (obligatoire pour créer le DMG)
-- **Node.js** et **npm**
-- **Homebrew** (pour installer create-dmg)
+- **macOS** (required to create the DMG)
+- **Node.js** and **npm**
+- **Homebrew** (to install create-dmg)
 
-## 🚀 Compilation rapide
+##  Quick Compilation
 
 ```bash
-# Rendre le script exécutable (première fois seulement)
+# Make the script executable (first time only)
 chmod +x build-macos.sh
 
-# Compiler et créer le DMG
+# Compile and create the DMG
 ./build-macos.sh
 ```
 
-## 📋 Étapes détaillées
+##  Detailed Steps
 
-### 1. Installation des outils
+### 1. Tool Installation
 ```bash
-# Installer Homebrew si nécessaire
+# Install Homebrew if necessary
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Installer create-dmg
+# Install create-dmg
 brew install create-dmg
 ```
 
-### 2. Compilation manuelle
+### 2. Manual Compilation
 ```bash
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Compiler l'application
+# Compile the application
 npm run package-mac
 
-# Créer le DMG
+# Create the DMG
 create-dmg \
   --volname "Liberchat" \
   --volicon "assets/icons/liberchat.icns" \
@@ -49,26 +49,26 @@ create-dmg \
   "liberchat-darwin-x64/"
 ```
 
-## 📦 Fichiers générés
+##  Generated Files
 
-- `liberchat-darwin-x64/liberchat.app` - Application macOS
-- `liberchat-macos-v2.0.0.dmg` - Installateur DMG
+- `liberchat-darwin-x64/liberchat.app` - macOS Application
+- `liberchat-macos-v2.0.0.dmg` - DMG Installer
 
-## 🔧 Configuration du serveur
+## Server Configuration
 
-Le serveur par défaut est configuré dans :
-- `index.html` (ligne 248) : champ input
-- `main.js` (ligne 6) : variable selectedServer
+The default server is configured in:
+- `index.html` (line 248): input field
+- `main.js` (line 6): selectedServer variable
 
-## ✅ Test de l'application
+##  Testing the Application
 
 ```bash
-# Lancer l'application compilée
+# Launch the compiled application
 open liberchat-darwin-x64/liberchat.app
 
-# Ou tester le DMG
+# Or test the DMG
 open liberchat-macos-v2.0.0.dmg
 ```
 
 ---
-**Note** : Ce script doit être exécuté sur macOS pour générer le fichier DMG.
+**Note**: This script must be executed on macOS to generate the DMG file.

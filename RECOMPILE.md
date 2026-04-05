@@ -1,32 +1,32 @@
-# ⚠️ IMPORTANT - Recompilation nécessaire
+#  IMPORTANT - Recompilation required
 
-## 🔄 Les modifications ne sont pas visibles ?
+## Changes not visible?
 
-Si les modifications (nouveau serveur, interface, etc.) ne sont pas visibles dans l'application compilée, c'est normal ! Il faut **recompiler l'application** pour que les changements soient pris en compte.
+If the modifications (new server, interface, etc.) are not visible in the compiled application, this is normal! You must **recompile the application** for the changes to take effect.
 
-## 🛠️ Recompiler sur macOS
+##  Recompile on macOS
 
-### Méthode automatique (Recommandée)
+### Automatic Method (Recommended)
 ```bash
-# Supprimer l'ancienne compilation
+# Remove the old build
 rm -rf liberchat-darwin-x64/
 
-# Recompiler avec le script
+# Recompile with the script
 ./build-macos.sh
 ```
 
-### Méthode manuelle
+### Manual Method
 ```bash
-# Supprimer l'ancienne compilation
+# Remove the old build
 rm -rf liberchat-darwin-x64/
 
-# Installer les dépendances (si nécessaire)
+# Install dependencies (if necessary)
 npm install
 
-# Recompiler l'application
+# Recompile the application
 npm run package-mac
 
-# Créer le DMG (optionnel)
+# Create DMG (optional)
 create-dmg \
   --volname "Liberchat" \
   --volicon "assets/icons/liberchat.icns" \
@@ -40,20 +40,20 @@ create-dmg \
   "liberchat-darwin-x64/"
 ```
 
-## ✅ Vérifications après compilation
+##  Checks after compilation
 
-1. **Serveur par défaut** : `https://liberchat.cnt-ait-contact.noho.st/liberchat`
-2. **Interface splash screen** avec sélecteur de thème 🌙/☀️
-3. **Historique des serveurs** (dropdown sous le champ URL)
-4. **Menu macOS** avec raccourcis Cmd+
-5. **Icône barre de menu** (en haut à droite)
+1. **Default Server**: `https://liberchat.cnt-ait-contact.noho.st/liberchat`
+2. **Splash screen interface** with theme selector 🌙/☀️
+3. **Server history** (dropdown under the URL field)
+4. **macOS Menu** with Cmd+ shortcuts
+5. **Menu bar icon** (top right)
 
-## 🐛 Si les modifications ne sont toujours pas visibles
+## If the changes are still not visible
 
-1. Vérifiez que vous lancez la **nouvelle** application compilée
-2. Supprimez complètement l'ancienne app : `rm -rf liberchat-darwin-x64/`
-3. Recompilez : `npm run package-mac`
-4. Testez la nouvelle app : `open liberchat-darwin-x64/liberchat.app`
+1. Verify that you are launching the **new** compiled application
+2. Completely remove the old app: `rm -rf liberchat-darwin-x64/`
+3. Recompile: `npm run package-mac`
+4. Test the new app: `open liberchat-darwin-x64/liberchat.app`
 
 ---
-**Note** : L'application compilée est un "snapshot" du code source au moment de la compilation. Toute modification du code source nécessite une recompilation.
+**Note**: The compiled application is a "snapshot" of the source code at the time of compilation. Any changes to the source code require recompilation.

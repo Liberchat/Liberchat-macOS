@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "🧹 Nettoyage complet avant compilation..."
+echo " Full cleanup before compilation..."
 
-# Supprimer tous les fichiers de build et cache
+# Remove all build and cache files
 rm -rf node_modules/
 rm -rf package-lock.json
 rm -rf liberchat-darwin-x64/
@@ -10,18 +10,18 @@ rm -rf dist/
 rm -f *.dmg
 rm -f *.zip
 
-echo "📦 Réinstallation des dépendances..."
+echo " Reinstalling dependencies..."
 npm install
 
-echo "⚙️ Compilation de l'application..."
+echo " Compiling the application..."
 npm run package-mac
 
-echo "✅ Compilation terminée !"
-echo "📁 Application générée : liberchat-darwin-x64/liberchat.app"
+echo " Compilation finished!"
+echo " Generated application: liberchat-darwin-x64/liberchat.app"
 echo ""
-echo "🔍 Vérifications :"
-echo "   • Serveur par défaut : https://liberchat.cnt-ait-contact.noho.st/liberchat"
-echo "   • Interface splash screen avec thème toggle"
-echo "   • Historique des serveurs"
+echo " Checks:"
+echo "   • Default server: https://liberchat.cnt-ait-contact.noho.st/liberchat"
+echo "   • Splash screen interface with theme toggle"
+echo "   • Server history"
 echo ""
-echo "🚀 Pour tester : open liberchat-darwin-x64/liberchat.app"
+echo " To test: open liberchat-darwin-x64/liberchat.app"
